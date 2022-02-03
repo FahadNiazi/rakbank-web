@@ -54,17 +54,32 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#e1eafd",
   },
   backgroundColorDark: {
-    backgroundColor: "#463085",
+    backgroundColor: "#4a3d67",
   },
   displayFlex: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  divider: {
+
+  dividerInLight: {
     marginTop: 20,
+    backgroundColor: "grey",
+  },
+  dividerInDark: {
+    marginTop: 20,
+    backgroundColor: "#64568b",
+  },
+  orStylingLight: {
+    textAlign: "center",
+    color: "black",
+  },
+  orStylingDark: {
+    textAlign: "center",
+    color: "#64568b",
   },
 }));
+
 export const LoginForm = () => {
   const theme = useSelector((state) => state.theme.value);
   const classes = useStyles();
@@ -97,9 +112,18 @@ export const LoginForm = () => {
             <Box className={classes.logo}>Travelguru</Box>
             <SwitchButton />
           </Box>
-          <Divider className={classes.divider} />
+          <Divider
+            className={
+              theme === "light" ? classes.dividerInLight : classes.dividerInDark
+            }
+          />
           <SignInForm />
-          <Box my={3} style={{ textAlign: "center" }}>
+          <Box
+            my={3}
+            className={
+              theme === "light" ? classes.orStylingLight : classes.orStylingDark
+            }
+          >
             -OR-
           </Box>
           <Box my={3}>

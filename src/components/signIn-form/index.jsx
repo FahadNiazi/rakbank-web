@@ -11,7 +11,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import axios from "axios";
 import React, { useState } from "react";
-import { styles } from "./styles";
+import { useSelector } from "react-redux";
+import { styles, useStylesSignIn } from "./styles";
 
 const validateEmail = (email) => {
   return String(email)
@@ -26,6 +27,8 @@ export const SignInForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const theme = useSelector((state) => state.theme.value);
+  const classes = useStylesSignIn();
 
   const handleSubmit = () => {
     setSubmitting(true);
@@ -41,13 +44,19 @@ export const SignInForm = () => {
 
   return (
     <Box>
-      <Box style={styles.singIn}>Sign in to Travelguru</Box>
+      <Box style={theme === "light" ? styles.singInLight : styles.singInDark}>
+        Sign in to Travelguru
+      </Box>
       <Box style={styles.displayFlex}>
-        <Box style={styles.signUp}>Don't have an account? </Box>{" "}
+        <Box style={theme === "light" ? styles.signUpLight : styles.signUpDark}>
+          Don't have an account?{" "}
+        </Box>{" "}
         <Box style={styles.signUpColor}>Signup</Box>
       </Box>
 
-      <Divider style={styles.divider} />
+      <Divider
+        style={theme === "light" ? styles.dividerInLight : styles.dividerInDark}
+      />
       <InputBase
         placeholder="Full Name"
         fullWidth
@@ -91,6 +100,7 @@ export const SignInForm = () => {
             submitting
           }
           onClick={handleSubmit}
+          classes={theme === "dark" ? { disabled: classes.disabledButton } : {}}
         >
           <Box display="flex">
             <Box>Continue</Box>
@@ -102,7 +112,9 @@ export const SignInForm = () => {
           </Box>
         </Button>
       </Box>
-      <Divider />
+      <Divider
+        style={theme === "light" ? styles.dividerInLight : styles.dividerInDark}
+      />
     </Box>
   );
 };

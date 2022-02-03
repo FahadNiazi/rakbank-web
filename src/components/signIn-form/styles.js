@@ -1,6 +1,14 @@
+import { makeStyles } from "@material-ui/core";
+
 export const styles = {
-  singIn: {
+  singInLight: {
     color: "#43436b",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginTop: 40,
+  },
+  singInDark: {
+    color: "white",
     fontWeight: "bold",
     fontSize: 20,
     marginTop: 40,
@@ -10,8 +18,14 @@ export const styles = {
     alignItems: "center",
     marginTop: 15,
   },
-  signUp: {
+  signUpLight: {
     color: "black",
+    display: "flex",
+    fontSize: 12,
+    fontWeight: 400,
+  },
+  signUpDark: {
+    color: "#64568b",
     display: "flex",
     fontSize: 12,
     fontWeight: 400,
@@ -37,7 +51,19 @@ export const styles = {
     borderRadius: 10,
     textTransform: "capitalize",
   },
-  divider: {
+  dividerInLight: {
     marginTop: 30,
+    backgroundColor: "grey",
+  },
+  dividerInDark: {
+    marginTop: 30,
+    backgroundColor: "#64568b",
+  },
+  disabledDark: {
+    backgroundColor: "gray",
   },
 };
+
+export const useStylesSignIn = makeStyles((theme) => ({
+  disabledButton: { backgroundColor: "#4a3d67 !important" },
+}));
