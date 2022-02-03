@@ -1,8 +1,15 @@
-import { Box, Button, Divider, InputBase } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  InputBase,
+} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import axios from "axios";
 import React, { useState } from "react";
 import { styles } from "./styles";
 
@@ -15,9 +22,23 @@ const validateEmail = (email) => {
 };
 export const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    setSubmitting(true);
+    axios
+      .get(
+        `https://61e7ec0de32cd90017acbea1.mockapi.io/api/v1/login?username=${username}&email=${email}&password=${password}`
+      )
+      .then(() => {
+        setSubmitting(false);
+        alert("Logged in successfully");
+      });
+  };
+
   return (
     <Box>
       <Box style={styles.singIn}>Sign in to Travelguru</Box>
@@ -64,10 +85,21 @@ export const SignInForm = () => {
           fullWidth
           style={styles.borderRadius}
           disabled={
-            password.length < 8 || !validateEmail(email) || username.length < 3
+            password.length < 8 ||
+            !validateEmail(email) ||
+            username.length < 3 ||
+            submitting
           }
+          onClick={handleSubmit}
         >
-          Continue
+          <Box display="flex">
+            <Box>Continue</Box>
+            {submitting && (
+              <Box ml={2}>
+                <CircularProgress size="20px" />
+              </Box>
+            )}
+          </Box>
         </Button>
       </Box>
       <Divider />

@@ -1,9 +1,11 @@
 import { Box, Divider, Grid, makeStyles } from "@material-ui/core";
 import login from "../../assets/login.png";
+import loginDark from "../../assets/login-dark.png";
 import SwitchButton from "../../components/switchButton";
 import { SignInForm } from "../../components/signIn-form";
 import { SignInWithGoogle } from "../../components/signInWithGoogle";
 import { useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -76,7 +78,11 @@ export const LoginForm = () => {
     >
       <Box className={classes.container}>
         <Grid item lg={7}>
-          <img className={classes.backgroundImage} src={login} alt="" />
+          <img
+            className={classes.backgroundImage}
+            src={theme === "light" ? login : loginDark}
+            alt=""
+          />
         </Grid>
         <Grid
           item
