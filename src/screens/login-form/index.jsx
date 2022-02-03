@@ -3,6 +3,7 @@ import login from "../../assets/login.png";
 import SwitchButton from "../../components/switchButton";
 import { SignInForm } from "../../components/signIn-form";
 import { SignInWithGoogle } from "../../components/signInWithGoogle";
+import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -40,8 +41,18 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
   },
+  backgroundGradientDark: {
+    background:
+      "linear-gradient(213deg, #482455, rgba(255,0,0,0) 39.71%),linear-gradient(127deg, #18083b, rgba(0,255,0,0) 70.71%),linear-gradient(336deg, #18083b, #18083b 70.71%)",
+    padding: 40,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+  },
   backgroundColor: {
     backgroundColor: "#e1eafd",
+  },
+  backgroundColorDark: {
+    backgroundColor: "#463085",
   },
   displayFlex: {
     display: "flex",
@@ -53,14 +64,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export const LoginForm = () => {
+  const theme = useSelector((state) => state.theme.value);
   const classes = useStyles();
   return (
-    <Box className={classes.backgroundColor}>
+    <Box
+      className={
+        theme === "light"
+          ? classes.backgroundColor
+          : classes.backgroundColorDark
+      }
+    >
       <Box className={classes.container}>
         <Grid item lg={7}>
           <img className={classes.backgroundImage} src={login} alt="" />
         </Grid>
-        <Grid item lg={4} className={classes.backgroundGradient}>
+        <Grid
+          item
+          lg={4}
+          className={
+            theme === "light"
+              ? classes.backgroundGradient
+              : classes.backgroundGradientDark
+          }
+        >
           <Box className={classes.displayFlex}>
             <Box className={classes.logo}>Travelguru</Box>
             <SwitchButton />

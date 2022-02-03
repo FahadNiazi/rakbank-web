@@ -1,6 +1,8 @@
 import { createTheme, MuiThemeProvider } from "@material-ui/core";
 import "./App.css";
 import { LoginForm } from "./screens/login-form";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -12,11 +14,13 @@ const theme = createTheme({
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <div>
-        <LoginForm />
-      </div>
-    </MuiThemeProvider>
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <div>
+          <LoginForm />
+        </div>
+      </MuiThemeProvider>
+    </Provider>
   );
 }
 

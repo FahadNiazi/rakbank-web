@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../../store/theme";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -59,23 +61,23 @@ const IOSSwitch = withStyles((theme) => ({
 
 export default function SwitchButton() {
   const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedC: true,
+    checked: true,
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+    dispatch(toggleTheme());
   };
-
   return (
     <FormGroup>
       <FormControlLabel
         control={
           <IOSSwitch
-            checked={state.checkedB}
+            checked={state.checked}
             onChange={handleChange}
-            name="checkedB"
+            name="checked"
           />
         }
       />
